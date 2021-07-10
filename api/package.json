@@ -1,0 +1,25 @@
+{
+	"name": "api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"debug": "nodemon --inspect=9229 server.js",
+		"unit": "jest"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"mongoose": "^5.13.2",
+		"restify": "^7.5.0",
+		"restify-clients": "^2.6.4",
+		"restify-cors-middleware": "^1.1.1",
+		"restify-errors": "^6.1.1"
+	},
+	"devDependencies": {
+		"jest": "^24.9.0",
+		"jest-extended": "^0.11.2",
+		"nodemon": "^1.18.9"
+	}
+}
