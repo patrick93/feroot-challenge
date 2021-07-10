@@ -1,10 +1,12 @@
 const authService = require("../../src/services/auth.service");
 const userRepository = require("../../src/repositories/user.repository");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const errors = require("restify-errors");
 
 jest.mock("../../src/repositories/user.repository");
 jest.mock("bcrypt");
+jest.mock("jsonwebtoken");
 
 describe("sign up", () => {
 	test("should create user", async () => {
@@ -117,6 +119,73 @@ describe("sign up", () => {
 
 		await expect(authService.signup(userInfo)).rejects.toThrow(
 			new errors.BadRequestError("The field password is invalid")
+		);
+	});
+});
+
+describe("sign in", () => {
+	test("should return an token when user sign in", async () => {
+		const userCredentials = {
+			email: "user@email.com",
+			password: "user-password",
+		};
+
+		const expected = "user-token";
+
+		const dbUser = {
+			_id: "userId",
+			name: "User Name",
+			email: "user@email.com",
+			password: "user-password",
+		};
+
+		userRepository.getUserByEmail.mockReturnValue(dbUser);
+
+		bcrypt.compare.mockResolvedValue(
+			dbUser.password === userCredentials.password
+		);
+
+		jwt.sign.mockReturnValue(expected);
+
+		const actual = await authService.signIn(userCredentials);
+
+		expect(actual).toEqual(expected);
+	});
+
+	test("should throw an error when password does not match", async () => {
+		const userCredentials = {
+			email: "user@email.com",
+			password: "wrong-user-password",
+		};
+
+		const dbUser = {
+			_id: "userId",
+			name: "User Name",
+			email: "user@email.com",
+			password: "user-password",
+		};
+
+		userRepository.getUserByEmail.mockReturnValue(dbUser);
+
+		bcrypt.compare.mockResolvedValue(
+			dbUser.password === userCredentials.password
+		);
+
+		await expect(authService.signIn(userCredentials)).rejects.toThrow(
+			new errors.BadRequestError("Email or Password is invalid")
+		);
+	});
+
+	test("should throw an error when does not find a user with email", async () => {
+		const userCredentials = {
+			email: "user@email.com",
+			password: "wrong-user-password",
+		};
+
+		userRepository.getUserByEmail.mockReturnValue(null);
+
+		await expect(authService.signIn(userCredentials)).rejects.toThrow(
+			new errors.BadRequestError("Email or Password is invalid")
 		);
 	});
 });
