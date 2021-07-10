@@ -1,18 +1,21 @@
-const mongoose = require('mongoose');
-const config = require('../../config');
+const mongoose = require("mongoose");
+const config = require("../../config");
 
-console.log(config.mongodbUrl)
+console.log(config.mongodbUrl);
 
-mongoose.connect(`${config.mongodbUrl}/db`, {useNewUrlParser: true, useUnifiedTopology: true});
-
-const userSchema = new mongoose.Schema({
-	name: String
+mongoose.connect(`${config.mongodbUrl}/db`, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 });
 
-const User = mongoose.model('User', userSchema);
+const userSchema = new mongoose.Schema({
+	name: String,
+});
+
+const User = mongoose.model("User", userSchema);
 
 function setRoutes(server) {
-	server.get('/ping', isAlive);
+	server.get("/ping", isAlive);
 }
 
 async function isAlive(request, response, next) {
