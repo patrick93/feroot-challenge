@@ -2,7 +2,21 @@ const restify = require("restify");
 const corsMiddleware = require("restify-cors-middleware");
 const fs = require("fs");
 const path = require("path");
+const mongoose = require("mongoose");
 const config = require("./config");
+
+mongoose
+	.connect(`${config.mongodbUrl}/db`, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() => {
+		console.log("Successfully connect to MongoDB.");
+	})
+	.catch((err) => {
+		console.error("Connection error", err);
+		process.exit();
+	});
 
 const port = process.env.NODEJS_API_PORT || 9000;
 

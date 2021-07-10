@@ -5,8 +5,8 @@ module.exports = {
 		es2021: true,
 		"jest/globals": true,
 	},
-	extends: ["eslint:recommended", "prettier", "plugin:jest/recommended"],
-	plugins: ["prettier"],
+	extends: ["eslint:recommended", "prettier"],
+	plugins: ["prettier", "jest"],
 	parserOptions: {
 		ecmaVersion: 12,
 	},
