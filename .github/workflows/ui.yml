@@ -35,10 +35,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
         
       - name: Install dependencies
+        working-directory: ./ui
         run: npm install
       
       - name: Run lint
+        working-directory: ./ui
         run: npm run lint
         
       - name: Run unit tests
+        working-directory: ./ui
         run: npm run test:unit
