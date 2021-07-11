@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import authService from '../services/auth.service';
+import authService from "../services/auth.service";
 import sessionService from "../services/session.service";
 
 export default {
@@ -42,9 +42,9 @@ export default {
     return {
       userCredentials: {
         email: "",
-        password: ""
-      }
-    }
+        password: "",
+      },
+    };
   },
   methods: {
     async onSignInHandler() {
@@ -55,7 +55,7 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
   },
 };
 </script>
@@ -75,4 +75,3 @@ export default {
   }
 }
 </style>
-

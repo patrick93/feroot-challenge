@@ -3,12 +3,12 @@
     <h1>Feroot</h1>
     <h4>Welcome {{ user.email }}!</h4>
     <button
-        type="button"
-        class="w-100 btn btn-primary"
-        @click="onLogoutHandler"
-      >
-        Logout
-      </button>
+      type="button"
+      class="w-100 btn btn-primary"
+      @click="onLogoutHandler"
+    >
+      Logout
+    </button>
   </div>
 </template>
 
@@ -19,8 +19,8 @@ export default {
   name: "Welcome",
   data() {
     return {
-      user: null
-    }
+      user: null,
+    };
   },
   created() {
     this.user = sessionService.getUserInfo();
@@ -29,7 +29,7 @@ export default {
     onLogoutHandler() {
       sessionService.logout();
       this.$router.push({ name: "sign-in" });
-    }
+    },
   },
 };
 </script>
@@ -49,4 +49,3 @@ export default {
   }
 }
 </style>
-

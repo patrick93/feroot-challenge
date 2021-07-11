@@ -23,8 +23,8 @@ const routes = [
     name: "welcome",
     component: () =>
       import(/* webpackChunkName: "welcome" */ "../views/Welcome.vue"),
-    meta: { requiresAuth: true }
-  }
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({
