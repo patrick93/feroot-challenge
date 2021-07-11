@@ -51,7 +51,7 @@ export default {
       try {
         const { token } = await authService.signIn(this.userCredentials);
         sessionService.save(token);
-        console.log(sessionService.getUserInfo());
+        this.$router.push({ name: "welcome" });
       } catch (error) {
         console.error(error);
       }

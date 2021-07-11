@@ -10,7 +10,17 @@ function getUserInfo() {
   return jwt.decode(token);
 }
 
+function isLoggedIn() {
+  return !!localStorage.getItem("token");
+}
+
+function logout() {
+  localStorage.removeItem("token");
+}
+
 export default {
   save,
+  logout,
+  isLoggedIn,
   getUserInfo,
 };
