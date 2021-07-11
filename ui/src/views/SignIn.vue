@@ -2,6 +2,9 @@
   <div class="sign-in">
     <h1>Feroot</h1>
     <h4>Please Sign In</h4>
+    <div v-if="userRegisteredSuccessfully" class="alert alert-success">
+      User successfully registered. Just sign in.
+    </div>
     <form>
       <div class="mb-3">
         <label for="emailInput" class="form-label">Email</label>
@@ -82,6 +85,11 @@ export default {
         required,
       },
     },
+  },
+  computed: {
+    userRegisteredSuccessfully() {
+      return this.$route.params.userRegisteredSuccessfully;
+    }
   },
   methods: {
     async onSignInHandler() {

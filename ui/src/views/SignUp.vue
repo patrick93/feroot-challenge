@@ -117,7 +117,7 @@ export default {
             email: this.email,
             password: this.password,
           });
-          this.$router.push({ name: "sign-in" });
+          this.$router.push({ name: "sign-in", params: { userRegisteredSuccessfully: true } });
         } catch (error) {
           if (error.response.status === 409) {
             this.serverErrorMessage = "Email already registered";
