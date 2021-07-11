@@ -1,6 +1,5 @@
 <template>
   <div class="welcome">
-    <h1>Feroot</h1>
     <h4>Welcome {{ user.name }}!</h4>
     <button
       type="button"
@@ -37,16 +36,5 @@ export default {
 
 <style lang="scss" scoped>
 .welcome {
-  width: 100%;
-  max-width: 400px;
-  padding: 15px;
-  margin: auto;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 15px;
-
-  form {
-    text-align: left;
-  }
 }
 </style>
