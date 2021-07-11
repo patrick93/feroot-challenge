@@ -1,7 +1,7 @@
 <template>
   <div class="welcome">
     <h1>Feroot</h1>
-    <h4>Welcome {{ user.email }}!</h4>
+    <h4>Welcome {{ user.name }}!</h4>
     <button
       type="button"
       class="w-100 btn btn-primary"
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import userService from "../services/user.service";
 import sessionService from "../services/session.service";
 
 export default {
@@ -22,8 +23,8 @@ export default {
       user: null,
     };
   },
-  created() {
-    this.user = sessionService.getUserInfo();
+  async created() {
+    this.user = await userService.getUserInfo();
   },
   methods: {
     onLogoutHandler() {

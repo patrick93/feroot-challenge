@@ -1,13 +1,9 @@
-import jwt from "jsonwebtoken";
-
 function save(token) {
   localStorage.setItem("token", token);
 }
 
-function getUserInfo() {
-  const token = localStorage.getItem("token");
-
-  return jwt.decode(token);
+function getToken() {
+  return localStorage.getItem("token");
 }
 
 function isLoggedIn() {
@@ -22,5 +18,5 @@ export default {
   save,
   logout,
   isLoggedIn,
-  getUserInfo,
+  getToken,
 };
