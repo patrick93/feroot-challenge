@@ -50,6 +50,9 @@
         Sign In
       </button>
     </form>
+    <div class="mb-3">
+      Does not have an account? <router-link :to="{ name: 'sign-up' }">Create new one</router-link>
+    </div>
   </div>
 </template>
 
@@ -116,6 +119,7 @@ export default {
 
   form {
     text-align: left;
+    margin-bottom: 1rem;
   }
 
   .server-error-message {
