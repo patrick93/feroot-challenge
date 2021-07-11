@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import sessionService from "../services/session.service";
+import authService from "../services/auth.service";
 
 Vue.use(VueRouter);
 
@@ -35,7 +35,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    if (sessionService.isLoggedIn()) {
+    if (authService.getToken()) {
       next();
     } else {
       next({ name: "sign-in" });

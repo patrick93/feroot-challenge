@@ -14,7 +14,7 @@
 
 <script>
 import userService from "../services/user.service";
-import sessionService from "../services/session.service";
+import authService from "../services/auth.service";
 
 export default {
   name: "Welcome",
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     onLogoutHandler() {
-      sessionService.logout();
+      authService.logout();
       this.$router.push({ name: "sign-in" });
     },
   },

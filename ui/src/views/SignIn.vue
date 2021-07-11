@@ -61,7 +61,6 @@
 
 <script>
 import authService from "../services/auth.service";
-import sessionService from "../services/session.service";
 import { required, email } from "vuelidate/lib/validators";
 
 export default {
@@ -97,8 +96,7 @@ export default {
 
       if (!this.$v.$invalid) {
         try {
-          const { token } = await authService.signIn(this.userCredentials);
-          sessionService.save(token);
+          await authService.signIn(this.userCredentials);
           this.$router.push({ name: "welcome" });
         } catch (error) {
           if (error.response.status === 400) {
