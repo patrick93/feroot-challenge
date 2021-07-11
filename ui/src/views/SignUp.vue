@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="passwordInput" class="form-label">Repeat Password</label>
+        <label for="repeatPasswordInput" class="form-label">Repeat Password</label>
         <input
           type="password"
           id="repeatPasswordInput"
@@ -64,9 +64,10 @@
         type="button"
         class="w-100 btn btn-primary"
         @click="onSignUpHandler"
-        :disabled="$v.$anyDirty && $v.$invalid"
+        :disabled="($v.$anyDirty && $v.$invalid) || loading"
       >
-        Sign Up
+        <span v-if="loading" class="spinner-border spinner-border-sm"></span>
+        <span v-else>Sign Up</span>
       </button>
     </form>
     <div class="mb-3">
@@ -89,6 +90,7 @@ export default {
       password: "",
       repeatPassword: "",
       serverErrorMessage: "",
+      loading: false
     };
   },
   validations: {
@@ -112,6 +114,7 @@ export default {
 
       if (!this.$v.$invalid) {
         try {
+          this.loading = true;
           await authService.signUp({
             name: this.name,
             email: this.email,
@@ -129,6 +132,8 @@ export default {
               "Something unexpected happened. Please try again";
           }
           console.error(error);
+        } finally {
+          this.loading = false;
         }
       }
     },
@@ -147,7 +152,7 @@ export default {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
-    color: #dc3545;
+    color: $red;
     margin-bottom: 1rem;
   }
 }

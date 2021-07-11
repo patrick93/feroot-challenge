@@ -1,5 +1,8 @@
 <template>
-  <div class="welcome">
+  <div v-if="loading" class="d-flex justify-content-center">
+    <div class="spinner-border spinner"></div>
+  </div>
+  <div v-else class="welcome">
     <h4>Welcome {{ user.name }}!</h4>
     <button
       type="button"
@@ -20,10 +23,18 @@ export default {
   data() {
     return {
       user: null,
+      loading: false
     };
   },
   async created() {
-    this.user = await userService.getUserInfo();
+    try {
+      this.loading = true;
+      this.user = await userService.getUserInfo();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.loading = false;
+    }
   },
   methods: {
     onLogoutHandler() {
@@ -35,6 +46,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.spinner {
+  color: $dark-blue;
+}
 .welcome {
 }
 </style>

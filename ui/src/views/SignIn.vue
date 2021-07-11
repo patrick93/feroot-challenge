@@ -47,9 +47,10 @@
         type="button"
         class="w-100 btn btn-primary"
         @click="onSignInHandler"
-        :disabled="$v.$anyDirty && $v.$invalid"
+        :disabled="($v.$anyDirty && $v.$invalid) || loading"
       >
-        Sign In
+        <span v-if="loading" class="spinner-border spinner-border-sm"></span>
+        <span v-else>Sign In</span>
       </button>
     </form>
     <div class="mb-3">
@@ -72,6 +73,7 @@ export default {
         password: "",
       },
       serverErrorMessage: "",
+      loading: false
     };
   },
   validations: {
@@ -83,7 +85,7 @@ export default {
       password: {
         required,
       },
-    },
+    }
   },
   computed: {
     userRegisteredSuccessfully() {
@@ -95,6 +97,8 @@ export default {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
+        this.loading = true;
+
         try {
           await authService.signIn(this.userCredentials);
           this.$router.push({ name: "welcome" });
@@ -106,6 +110,8 @@ export default {
               "Something unexpected happened. Please try again";
           }
           console.error(error);
+        } finally {
+          this.loading = false;
         }
       }
     },
@@ -124,7 +130,7 @@ export default {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
-    color: #dc3545;
+    color: $red;
     margin-bottom: 1rem;
   }
 }
