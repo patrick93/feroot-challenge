@@ -1,39 +1,22 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <p v-if="text">{{ text }}</p>
-  </div>
+  <!-- <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div> -->
+  <router-view />
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
-import axios from "axios";
-
-export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
-  data() {
-    return {
-      text: "",
-    };
-  },
-  async created() {
-    const response = await axios.get("http://localhost:9000/ping");
-    this.text = response.data[0].name;
-  },
-};
-</script>
-
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
 }
 </style>
