@@ -17,8 +17,11 @@ describe("welcome page", () => {
     const wrapper = shallowMount(Welcome);
 
     it("should render welcome message", () => {
-      expect(wrapper.find(".welcome h4").text()).toEqual(
+      expect(wrapper.find(".welcome h4").text()).toMatch(
         `Welcome ${userData.name}!`
+      );
+      expect(wrapper.find(".welcome h4").text()).toMatch(
+        `You're logged in`
       );
     });
 

@@ -7,7 +7,11 @@
       {{ serverErrorMessage }}
     </h4>
     <template v-else>
-      <h4>Welcome {{ user.name }}!</h4>
+      <h4>
+        Welcome {{ user.name }}!
+        <br />
+        You're logged in
+      </h4>
       <button
         type="button"
         class="w-100 btn btn-primary"
@@ -56,5 +60,10 @@ export default {
 <style lang="scss" scoped>
 .spinner {
   color: $dark-blue;
+}
+.welcome {
+  h4 {
+    margin-bottom: 2rem;
+  }
 }
 </style>
