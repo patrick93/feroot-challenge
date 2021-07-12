@@ -3,59 +3,40 @@
     <h4>Please Sign Up</h4>
     <form>
       <div class="mb-3">
-        <label for="nameInput" class="form-label">Name</label>
-        <input
+        <form-group-input
+          label="Name"
           type="text"
-          id="nameInput"
-          class="form-control"
-          :class="{ 'is-invalid': $v.name.$error }"
-          v-model.trim="$v.name.$model"
+          v-model="$v.user.name.$model"
+          :has-error="$v.user.name.$error"
+          :errorMessage="nameErrorMessage"
         />
-        <div v-if="!$v.name.$required" class="invalid-feedback">
-          Name is required
-        </div>
       </div>
       <div class="mb-3">
-        <label for="emailInput" class="form-label">Email</label>
-        <input
+        <form-group-input
+          label="Email"
           type="email"
-          id="emailInput"
-          class="form-control"
-          v-model.trim="$v.email.$model"
-          :class="{ 'is-invalid': $v.email.$error }"
+          v-model="$v.user.email.$model"
+          :has-error="$v.user.email.$error"
+          :errorMessage="emailErrorMessage"
         />
-        <div
-          v-if="!$v.email.$required || !$v.email.$email"
-          class="invalid-feedback"
-        >
-          Invalid email
-        </div>
       </div>
       <div class="mb-3">
-        <label for="passwordInput" class="form-label">Password</label>
-        <input
+        <form-group-input
+          label="Password"
           type="password"
-          id="passwordInput"
-          class="form-control"
-          v-model="$v.password.$model"
-          :class="{ 'is-invalid': $v.password.$error }"
+          v-model="$v.user.password.$model"
+          :has-error="$v.user.password.$error"
+          :errorMessage="passwordErrorMessage"
         />
-        <div v-if="!$v.password.$required" class="invalid-feedback">
-          Password is required
-        </div>
       </div>
       <div class="mb-3">
-        <label for="repeatPasswordInput" class="form-label">Repeat Password</label>
-        <input
+        <form-group-input
+          label="Repeat Password"
           type="password"
-          id="repeatPasswordInput"
-          class="form-control"
-          v-model="$v.repeatPassword.$model"
-          :class="{ 'is-invalid': $v.repeatPassword.$error }"
+          v-model="$v.user.repeatPassword.$model"
+          :has-error="$v.user.repeatPassword.$error"
+          :errorMessage="repeatPasswordErrorMessage"
         />
-        <div v-if="!$v.repeatPassword.$required" class="invalid-feedback">
-          Passwords must be identical.
-        </div>
       </div>
       <div v-if="serverErrorMessage" class="server-error-message">
         {{ serverErrorMessage }}
@@ -64,7 +45,7 @@
         type="button"
         class="w-100 btn btn-primary"
         @click="onSignUpHandler"
-        :disabled="($v.$anyDirty && $v.$invalid) || loading"
+        :disabled="isSignUpButtonDisabled"
       >
         <span v-if="loading" class="spinner-border spinner-border-sm"></span>
         <span v-else>Sign Up</span>
@@ -81,32 +62,74 @@
 import { required, email, sameAs } from "vuelidate/lib/validators";
 import authService from "../services/auth.service";
 
+import FormGroupInput from "../components/FormGroupInput.vue";
+
 export default {
   name: "SignUp",
+  components: {
+    FormGroupInput
+  },
   data() {
     return {
-      name: "",
-      email: "",
-      password: "",
-      repeatPassword: "",
+      user: {
+        name: "",
+        email: "",
+        password: "",
+        repeatPassword: "",
+      },
       serverErrorMessage: "",
       loading: false
     };
   },
   validations: {
-    name: {
-      required,
+    user: {
+      name: {
+        required,
+      },
+      email: {
+        email,
+        required,
+      },
+      password: {
+        required,
+      },
+      repeatPassword: {
+        sameAsPassword: sameAs("password"),
+      },
+    }
+  },
+  computed: {
+    nameErrorMessage() {
+      if (!this.$v.user.name.$required) {
+        return "Name is required"
+      }
+
+      return "";
     },
-    email: {
-      email,
-      required,
+    emailErrorMessage() {
+      if (!this.$v.user.email.$required || !this.$v.user.email.$email) {
+        return "Invalid Email";
+      }
+
+      return "";
     },
-    password: {
-      required,
+    passwordErrorMessage() {
+      if (!this.$v.user.password.$required) {
+        return "Password is required";
+      }
+
+      return "";
     },
-    repeatPassword: {
-      sameAsPassword: sameAs("password"),
+    repeatPasswordErrorMessage() {
+      if (!this.$v.user.repeatPassword.$required) {
+        return "Passwords must be identical.";
+      }
+
+      return "";
     },
+    isSignUpButtonDisabled() {
+      return (this.$v.$anyDirty && this.$v.$invalid) || this.loading;
+    }
   },
   methods: {
     async onSignUpHandler() {
@@ -115,11 +138,7 @@ export default {
       if (!this.$v.$invalid) {
         try {
           this.loading = true;
-          await authService.signUp({
-            name: this.name,
-            email: this.email,
-            password: this.password,
-          });
+          await authService.signUp(this.user);
           this.$router.push({
             name: "sign-in",
             params: { userRegisteredSuccessfully: true },
