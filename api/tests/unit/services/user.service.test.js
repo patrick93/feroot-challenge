@@ -1,8 +1,8 @@
-const userService = require("../../src/services/user.service");
-const userRepository = require("../../src/repositories/user.repository");
+const userService = require("../../../src/services/user.service");
+const userRepository = require("../../../src/repositories/user.repository");
 const errors = require("restify-errors");
 
-jest.mock("../../src/repositories/user.repository");
+jest.mock("../../../src/repositories/user.repository");
 
 describe("get user by email", () => {
 	test("should return user data when user exists", async () => {
