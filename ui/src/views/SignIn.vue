@@ -1,6 +1,6 @@
 <template>
   <div class="sign-in">
-    <h4>Please Sign In</h4>
+    <h3 class="fw-normal">Please Sign In</h3>
     <div
       v-if="userRegisteredSuccessfully"
       class="alert alert-success test-user-registered-message"

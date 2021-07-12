@@ -24,7 +24,7 @@ describe("sign in page", () => {
     });
 
     it("should render header", () => {
-      expect(wrapper.find("h4").text()).toEqual("Please Sign In");
+      expect(wrapper.find("h3").text()).toEqual("Please Sign In");
     });
 
     it("should not render message of user registered", () => {
@@ -77,7 +77,7 @@ describe("sign in page", () => {
     });
 
     it("should render header", () => {
-      expect(wrapper.find("h4").text()).toEqual("Please Sign In");
+      expect(wrapper.find("h3").text()).toEqual("Please Sign In");
     });
 
     it("should render message of user registered", () => {

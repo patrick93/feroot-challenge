@@ -3,15 +3,15 @@
     <div class="spinner-border spinner"></div>
   </div>
   <div v-else class="welcome">
-    <h4 v-if="serverErrorMessage" class="test-error-message">
+    <h3  v-if="serverErrorMessage" class="fw-normal test-error-message">
       {{ serverErrorMessage }}
-    </h4>
+    </h3>
     <template v-else>
-      <h4>
+      <h3 class="fw-normal">
         Welcome {{ user.name }}!
         <br />
         You're logged in
-      </h4>
+      </h3>
       <button
         type="button"
         class="w-100 btn btn-primary"
@@ -62,7 +62,7 @@ export default {
   color: $dark-blue;
 }
 .welcome {
-  h4 {
+  h3 {
     margin-bottom: 2rem;
   }
 }

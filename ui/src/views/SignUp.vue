@@ -1,6 +1,6 @@
 <template>
   <div class="sign-up">
-    <h4>Please Sign Up</h4>
+    <h3 class="fw-normal">Please Sign Up</h3>
     <form>
       <div class="mb-3">
         <form-group-input

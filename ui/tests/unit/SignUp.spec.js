@@ -19,7 +19,7 @@ describe("sign up page", () => {
     });
 
     it("should render header", () => {
-      expect(wrapper.find("h4").text()).toEqual("Please Sign Up");
+      expect(wrapper.find("h3").text()).toEqual("Please Sign Up");
     });
 
     it("should render name input", () => {
