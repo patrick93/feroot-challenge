@@ -8,7 +8,7 @@
       :value="value"
       @input="onInputHandler"
     />
-    <div v-if="errorMessage" class="invalid-feedback">
+    <div v-if="errorMessage" class="invalid-feedback test-error-message">
       {{ errorMessage }}
     </div>
   </div>
