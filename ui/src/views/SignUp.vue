@@ -162,9 +162,9 @@ export default {
         this.serverErrorMessage = "Email already registered";
       } else {
         this.serverErrorMessage =
-          "Something unexpected happened. Please try again";
+          "Something unexpected happened. Please try again later";
       }
-    }
+    },
   },
 };
 </script>

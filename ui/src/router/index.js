@@ -25,6 +25,11 @@ const routes = [
       import(/* webpackChunkName: "welcome" */ "../views/Welcome.vue"),
     meta: { requiresAuth: true },
   },
+  {
+    path: "*",
+    component: () =>
+      import(/* webpackChunkName: "notfound" */ "../views/NotFound.vue"),
+  },
 ];
 
 const router = new VueRouter({

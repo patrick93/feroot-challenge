@@ -302,7 +302,7 @@ describe("sign in page", () => {
 
     it("should show server error message", () => {
       expect(wrapper.find(".server-error-message").text()).toEqual(
-        "Something unexpected happened. Please try again"
+        "Something unexpected happened. Please try again later"
       );
     });
   });

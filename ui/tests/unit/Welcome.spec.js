@@ -5,7 +5,6 @@ import authService from "../../src/services/auth.service";
 
 import Welcome from "../../src/views/Welcome.vue";
 
-
 jest.mock("../../src/services/auth.service");
 jest.mock("../../src/services/user.service");
 
@@ -25,9 +24,7 @@ describe("welcome page", () => {
       expect(wrapper.find(".welcome h3").text()).toMatch(
         `Welcome ${userData.name}!`
       );
-      expect(wrapper.find(".welcome h3").text()).toMatch(
-        `You're logged in`
-      );
+      expect(wrapper.find(".welcome h3").text()).toMatch(`You're logged in`);
     });
 
     it("should render logout button", () => {
@@ -49,18 +46,18 @@ describe("welcome page", () => {
     authService.logout = jest.fn();
 
     const router = {
-      push: jest.fn()
-    }
+      push: jest.fn(),
+    };
 
     const wrapper = shallowMount(Welcome, {
       mocks: {
-        $router: router
-      }
+        $router: router,
+      },
     });
 
     beforeEach(async () => {
       await wrapper.find("button").trigger("click");
-    })
+    });
 
     it("should call logout on authService", () => {
       expect(authService.logout).toHaveBeenCalledTimes(1);

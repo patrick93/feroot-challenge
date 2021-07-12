@@ -130,9 +130,9 @@ export default {
         this.serverErrorMessage = "Invalid email or password";
       } else {
         this.serverErrorMessage =
-          "Something unexpected happened. Please try again";
+          "Something unexpected happened. Please try again later";
       }
-    }
+    },
   },
 };
 </script>

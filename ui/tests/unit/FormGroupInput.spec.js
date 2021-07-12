@@ -6,8 +6,8 @@ describe("form group input component", () => {
     const wrapper = shallowMount(FormGroupInput, {
       propsData: {
         value: "input value",
-        label: "Input Label"
-      }
+        label: "Input Label",
+      },
     });
 
     it("should render label", () => {
@@ -22,7 +22,7 @@ describe("form group input component", () => {
 
     it("should add invalid class in input", () => {
       expect(wrapper.find("input").classes()).not.toContain("is-invalid");
-    })
+    });
 
     it("should not render error message", () => {
       expect(wrapper.find(".test-error-message").exists()).toBeFalsy();
@@ -33,15 +33,15 @@ describe("form group input component", () => {
     const wrapper = shallowMount(FormGroupInput, {
       propsData: {
         value: "input value",
-        label: "Input Label"
-      }
+        label: "Input Label",
+      },
     });
 
-    wrapper.find("input").setValue("new value")
+    wrapper.find("input").setValue("new value");
 
     it("should emit an event with updated value", () => {
       expect(wrapper.emitted().input[0][0]).toEqual("new value");
-    })
+    });
   });
 
   describe("when has error", () => {
@@ -50,8 +50,8 @@ describe("form group input component", () => {
         value: "input value",
         label: "Input Label",
         hasError: true,
-        errorMessage: "Field is invalid"
-      }
+        errorMessage: "Field is invalid",
+      },
     });
 
     it("should add invalid class in input", () => {
@@ -60,7 +60,9 @@ describe("form group input component", () => {
 
     it("should render error message", () => {
       expect(wrapper.find(".test-error-message").exists()).toBeTruthy();
-      expect(wrapper.find(".test-error-message").text()).toEqual("Field is invalid");
+      expect(wrapper.find(".test-error-message").text()).toEqual(
+        "Field is invalid"
+      );
     });
   });
-})
+});

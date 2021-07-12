@@ -1,4 +1,4 @@
 export default {
   CONFLICT: 409,
-  BAD_REQUEST: 400
+  BAD_REQUEST: 400,
 };

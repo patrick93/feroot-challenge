@@ -3,7 +3,7 @@
     <div class="spinner-border spinner"></div>
   </div>
   <div v-else class="welcome">
-    <h3  v-if="serverErrorMessage" class="fw-normal test-error-message">
+    <h3 v-if="serverErrorMessage" class="fw-normal test-error-message">
       {{ serverErrorMessage }}
     </h3>
     <template v-else>
