@@ -36,7 +36,7 @@ describe("sign up", () => {
 			password: "user-password",
 		};
 
-		bcrypt.hashSync.mockReturnValue("hashed-user-password");
+		bcrypt.hashSync.mockResolvedValue("hashed-user-password");
 
 		userRepository.addUser.mockReturnValue({
 			_id: "userId",

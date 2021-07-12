@@ -19,7 +19,7 @@ async function signup({ name, email, password }) {
 	const user = await userRepository.addUser({
 		name,
 		email,
-		password: bcrypt.hashSync(password, config.passwordSaltRounds),
+		password: await bcrypt.hashSync(password, config.passwordSaltRounds),
 	});
 
 	return { name: user.name, email: user.email };
