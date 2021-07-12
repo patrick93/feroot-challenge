@@ -43,7 +43,6 @@ export default {
     } catch (error) {
       this.serverErrorMessage =
         "Something unexpected happened. Try refresh the page";
-      console.error(error);
     } finally {
       this.loading = false;
     }

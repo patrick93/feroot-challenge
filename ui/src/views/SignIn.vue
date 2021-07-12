@@ -119,7 +119,6 @@ export default {
           this.$router.push({ name: "welcome" });
         } catch (error) {
           this.handleServerError(error);
-          console.error(error);
         } finally {
           this.loading = false;
         }
