@@ -54,6 +54,7 @@ describe("SignUp.vue", () => {
       expect(wrapper.findComponent(RouterLinkStub).props().to).toEqual({
         name: "sign-in",
       });
+      expect(wrapper.findComponent(RouterLinkStub).text()).toEqual("Sign in");
     });
   });
 

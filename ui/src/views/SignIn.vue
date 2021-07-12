@@ -1,12 +1,16 @@
 <template>
   <div class="sign-in">
     <h4>Please Sign In</h4>
-    <div v-if="userRegisteredSuccessfully" class="alert alert-success">
+    <div
+      v-if="userRegisteredSuccessfully"
+      class="alert alert-success test-user-registered-message"
+    >
       User successfully registered. Just sign in.
     </div>
     <form>
       <div class="mb-3">
         <form-group-input
+          class="test-email"
           label="Email"
           type="email"
           v-model="$v.userCredentials.email.$model"
@@ -16,6 +20,7 @@
       </div>
       <div class="mb-3">
         <form-group-input
+          class="test-password"
           label="Password"
           type="password"
           v-model="$v.userCredentials.password.$model"
@@ -36,8 +41,8 @@
         <span v-else>Sign In</span>
       </button>
     </form>
-    <div class="mb-3">
-      Does not have an account?
+    <div class="mb-3 test-footer">
+      <span>Does not have an account? </span>
       <router-link :to="{ name: 'sign-up' }">Create new one</router-link>
     </div>
   </div>
@@ -84,7 +89,7 @@ export default {
         !this.$v.userCredentials.email.$required ||
         !this.$v.userCredentials.email.$email
       ) {
-        return "Invalid Email";
+        return "Invalid email";
       }
 
       return "";
