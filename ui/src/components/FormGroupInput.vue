@@ -20,29 +20,27 @@ export default {
   props: {
     value: {
       type: String,
-      required: true
+      required: true,
     },
     label: {
       type: String,
-      required: true
+      required: true,
     },
     hasError: {
       type: Boolean,
-      required: false
+      required: false,
     },
     errorMessage: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   methods: {
     onInputHandler(event) {
       this.$emit("input", event.target.value);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -67,7 +67,7 @@ import FormGroupInput from "../components/FormGroupInput.vue";
 export default {
   name: "SignUp",
   components: {
-    FormGroupInput
+    FormGroupInput,
   },
   data() {
     return {
@@ -78,7 +78,7 @@ export default {
         repeatPassword: "",
       },
       serverErrorMessage: "",
-      loading: false
+      loading: false,
     };
   },
   validations: {
@@ -96,12 +96,12 @@ export default {
       repeatPassword: {
         sameAsPassword: sameAs("password"),
       },
-    }
+    },
   },
   computed: {
     nameErrorMessage() {
       if (!this.$v.user.name.$required) {
-        return "Name is required"
+        return "Name is required";
       }
 
       return "";
@@ -129,7 +129,7 @@ export default {
     },
     isSignUpButtonDisabled() {
       return (this.$v.$anyDirty && this.$v.$invalid) || this.loading;
-    }
+    },
   },
   methods: {
     async onSignUpHandler() {

@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       user: null,
-      loading: false
+      loading: false,
     };
   },
   async created() {

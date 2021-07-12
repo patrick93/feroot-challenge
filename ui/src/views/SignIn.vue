@@ -6,39 +6,22 @@
     </div>
     <form>
       <div class="mb-3">
-        <label for="emailInput" class="form-label">Email</label>
-        <input
+        <form-group-input
+          label="Email"
           type="email"
-          id="emailInput"
-          class="form-control"
-          v-model.trim="$v.userCredentials.email.$model"
-          :class="{ 'is-invalid': $v.userCredentials.email.$error }"
+          v-model="$v.userCredentials.email.$model"
+          :has-error="$v.userCredentials.email.$error"
+          :errorMessage="emailErrorMessage"
         />
-        <div
-          v-if="
-            !$v.userCredentials.email.$required ||
-            !$v.userCredentials.email.$email
-          "
-          class="invalid-feedback"
-        >
-          Invalid email
-        </div>
       </div>
       <div class="mb-3">
-        <label for="passwordInput" class="form-label">Password</label>
-        <input
+        <form-group-input
+          label="Password"
           type="password"
-          id="passwordInput"
-          class="form-control"
-          v-model.trim="$v.userCredentials.password.$model"
-          :class="{ 'is-invalid': $v.userCredentials.password.$error }"
+          v-model="$v.userCredentials.password.$model"
+          :has-error="$v.userCredentials.password.$error"
+          :errorMessage="passwordErrorMessage"
         />
-        <div
-          v-if="!$v.userCredentials.password.$required"
-          class="invalid-feedback"
-        >
-          Password is required
-        </div>
       </div>
       <div v-if="serverErrorMessage" class="server-error-message">
         {{ serverErrorMessage }}
@@ -64,8 +47,13 @@
 import authService from "../services/auth.service";
 import { required, email } from "vuelidate/lib/validators";
 
+import FormGroupInput from "../components/FormGroupInput.vue";
+
 export default {
   name: "SignIn",
+  components: {
+    FormGroupInput,
+  },
   data() {
     return {
       userCredentials: {
@@ -73,7 +61,7 @@ export default {
         password: "",
       },
       serverErrorMessage: "",
-      loading: false
+      loading: false,
     };
   },
   validations: {
@@ -85,11 +73,31 @@ export default {
       password: {
         required,
       },
-    }
+    },
   },
   computed: {
     userRegisteredSuccessfully() {
       return this.$route.params.userRegisteredSuccessfully;
+    },
+    emailErrorMessage() {
+      if (
+        !this.$v.userCredentials.email.$required ||
+        !this.$v.userCredentials.email.$email
+      ) {
+        return "Invalid Email";
+      }
+
+      return "";
+    },
+    passwordErrorMessage() {
+      if (!this.$v.userCredentials.password.$required) {
+        return "Password is required";
+      }
+
+      return "";
+    },
+    isSignInButtonDisabled() {
+      return (this.$v.$anyDirty && this.$v.$invalid) || this.loading;
     },
   },
   methods: {
