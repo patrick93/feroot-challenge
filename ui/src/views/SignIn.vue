@@ -52,6 +52,8 @@
 import authService from "../services/auth.service";
 import { required, email } from "vuelidate/lib/validators";
 
+import statusCode from "../constants/status-code";
+
 import FormGroupInput from "../components/FormGroupInput.vue";
 
 export default {
@@ -116,18 +118,21 @@ export default {
           await authService.signIn(this.userCredentials);
           this.$router.push({ name: "welcome" });
         } catch (error) {
-          if (error.response.status === 400) {
-            this.serverErrorMessage = "Invalid email or password";
-          } else {
-            this.serverErrorMessage =
-              "Something unexpected happened. Please try again";
-          }
+          this.handleServerError(error);
           console.error(error);
         } finally {
           this.loading = false;
         }
       }
     },
+    handleServerError(error) {
+      if (error.response.status === statusCode.BAD_REQUEST) {
+        this.serverErrorMessage = "Invalid email or password";
+      } else {
+        this.serverErrorMessage =
+          "Something unexpected happened. Please try again";
+      }
+    }
   },
 };
 </script>

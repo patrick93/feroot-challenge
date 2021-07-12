@@ -66,6 +66,8 @@
 import { required, email, sameAs } from "vuelidate/lib/validators";
 import authService from "../services/auth.service";
 
+import statusCode from "../constants/status-code";
+
 import FormGroupInput from "../components/FormGroupInput.vue";
 
 export default {
@@ -148,18 +150,21 @@ export default {
             params: { userRegisteredSuccessfully: true },
           });
         } catch (error) {
-          if (error?.response?.status === 409) {
-            this.serverErrorMessage = "Email already registered";
-          } else {
-            this.serverErrorMessage =
-              "Something unexpected happened. Please try again";
-          }
+          this.handleServerError(error);
           console.error(error);
         } finally {
           this.loading = false;
         }
       }
     },
+    handleServerError(error) {
+      if (error?.response?.status === statusCode.CONFLICT) {
+        this.serverErrorMessage = "Email already registered";
+      } else {
+        this.serverErrorMessage =
+          "Something unexpected happened. Please try again";
+      }
+    }
   },
 };
 </script>
