@@ -9,7 +9,7 @@ jest.mock("../../src/services/auth.service");
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe("SignUp.vue", () => {
+describe("sign up page", () => {
   describe("when renders the component", () => {
     const wrapper = shallowMount(SignUp, {
       localVue,

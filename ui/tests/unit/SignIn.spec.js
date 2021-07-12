@@ -9,7 +9,7 @@ jest.mock("../../src/services/auth.service");
 const localVue = createLocalVue();
 localVue.use(Vuelidate);
 
-describe("SignIn.vue", () => {
+describe("sign in page", () => {
   describe("when renders the component", () => {
     const wrapper = shallowMount(SignIn, {
       localVue,
@@ -55,7 +55,9 @@ describe("SignIn.vue", () => {
       expect(wrapper.findComponent(RouterLinkStub).props().to).toEqual({
         name: "sign-up",
       });
-      expect(wrapper.findComponent(RouterLinkStub).text()).toEqual("Create new one");
+      expect(wrapper.findComponent(RouterLinkStub).text()).toEqual(
+        "Create new one"
+      );
     });
   });
 
