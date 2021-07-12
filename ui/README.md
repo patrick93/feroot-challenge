@@ -1,4 +1,11 @@
-# front
+# Feroot Challenge UI
+
+This project is UI for the project [Feroot Challenge](https://github.com/patrick93/feroot-challenge)
+
+## Requirements
+
+- [Api Project](https://github.com/patrick93/feroot-challenge/api) running local
+- NodeJS 14.x
 
 ## Project setup
 ```
