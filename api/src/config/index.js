@@ -1,5 +1,5 @@
 module.exports = {
-	name: "api",
+	name: "feroot-challenge-api",
 	mongodbUrl: process.env.MONGODB_URL || "mongodb://localhost:27017",
 	passwordSaltRounds: 10,
 	jwt: {

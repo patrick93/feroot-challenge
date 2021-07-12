@@ -3,7 +3,7 @@ const corsMiddleware = require("restify-cors-middleware");
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
-const config = require("./config");
+const config = require("./src/config");
 
 mongoose
 	.connect(`${config.mongodbUrl}/db`, {
@@ -23,7 +23,6 @@ const port = process.env.NODEJS_API_PORT || 9000;
 const server = restify.createServer({ name: config.name });
 
 const cors = corsMiddleware({
-	preflightMaxAge: 5, // Optional
 	origins: ["*"],
 	allowHeaders: ["authorization"],
 });
@@ -47,6 +46,7 @@ fs.readdirSync(path.join(__dirname, "./src/controllers")).forEach(function (
 });
 
 server.on("after", function (request, res, route, error) {
+	//In a real app, the error would be sent to error monitoring service, for example, sentry
 	console.error(error);
 });
 

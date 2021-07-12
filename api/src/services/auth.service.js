@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const errors = require("restify-errors");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
-const config = require("../../config");
+const config = require("../config");
 
 async function signup({ name, email, password }) {
 	_validateEmail(email);

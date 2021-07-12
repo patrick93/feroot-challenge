@@ -10,7 +10,7 @@ function sanitize(request, response, next) {
 		});
 	}
 
-	next();
+	return next();
 }
 
 module.exports = { sanitize };
