@@ -4,6 +4,7 @@
     <form>
       <div class="mb-3">
         <form-group-input
+          class="test-name"
           label="Name"
           type="text"
           v-model="$v.user.name.$model"
@@ -13,6 +14,7 @@
       </div>
       <div class="mb-3">
         <form-group-input
+          class="test-email"
           label="Email"
           type="email"
           v-model="$v.user.email.$model"
@@ -22,6 +24,7 @@
       </div>
       <div class="mb-3">
         <form-group-input
+          class="test-password"
           label="Password"
           type="password"
           v-model="$v.user.password.$model"
@@ -31,6 +34,7 @@
       </div>
       <div class="mb-3">
         <form-group-input
+          class="test-repeat-password"
           label="Repeat Password"
           type="password"
           v-model="$v.user.repeatPassword.$model"
@@ -51,8 +55,8 @@
         <span v-else>Sign Up</span>
       </button>
     </form>
-    <div class="mb-3">
-      Already have an account?
+    <div class="mb-3 test-footer">
+      <span>Already have an account? </span>
       <router-link :to="{ name: 'sign-in' }">Sign in</router-link>
     </div>
   </div>
@@ -108,7 +112,7 @@ export default {
     },
     emailErrorMessage() {
       if (!this.$v.user.email.$required || !this.$v.user.email.$email) {
-        return "Invalid Email";
+        return "Invalid email";
       }
 
       return "";
@@ -122,7 +126,7 @@ export default {
     },
     repeatPasswordErrorMessage() {
       if (!this.$v.user.repeatPassword.$required) {
-        return "Passwords must be identical.";
+        return "Passwords must be identical";
       }
 
       return "";
@@ -144,7 +148,7 @@ export default {
             params: { userRegisteredSuccessfully: true },
           });
         } catch (error) {
-          if (error.response.status === 409) {
+          if (error?.response?.status === 409) {
             this.serverErrorMessage = "Email already registered";
           } else {
             this.serverErrorMessage =
